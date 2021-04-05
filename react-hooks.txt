@@ -1,0 +1,35 @@
+Video 3. Những điều cần biết về useState() hook
+1. Giới thiệu hook useState()
+2. Array destructoring syntax
+3. So sánh State giữa class và functional component.
+4. Thêm ví dụ dùng useState()
+5. Những điều lưu ý khi dùng useState()
+6. Next step.
+----------------------------------------------------
+1. Giới thiệu hook useState()
+  - Là một hook cơ bản.
+  - Giúp mình có thể dùng state trong functional component (Lúc trước chỉ có Class mới dùng được state, nhờ hook useState trong React Hooks)
+  - Input: initialState (giá trị hoặc function).
+  - Output: một mảng có 2 phần tử tương ứng cho state và setState
+  - Cách dùng: const [name, setName] = useState('Hau');
+  - Khi muốn thay đổi state phải clone nó ra một mảng mới.
+2. Những bài tập cơ bản.
+3. Những điều lưu ý khi dùng useState()
+ - useState() use Replacing instead of merging
+ - Ví dụ 1:
+    // setState() in class component: Merging
+    this.state = { name: 'Hau', color: 'red' };
+    this.setState({color: 'green'});
+    // trả về --> { name: 'Hau', color: 'green' }
+    
+    // useState() in functional component: Replacing
+    const [person, setPerson] = useState({ name: 'Hau', color: 'red' });
+    setPerson({ color: 'green' });
+    // trả về --> {color: 'green'}
+
+    Giải pháp (Solution)
+    // useState() in functional component: Replacing
+    const [person, setPerson] = useState({ name: 'Hau', color: 'red' });
+    setPerson({...person, color: 'green'});
+    // trả về --> { name: 'Hau', color: 'green' }
+  - Initial state chỉ dùng cho lần đầu, những lần sau nó bị bỏ rơi.
