@@ -33,3 +33,83 @@ Video 3. Những điều cần biết về useState() hook
     setPerson({...person, color: 'green'});
     // trả về --> { name: 'Hau', color: 'green' }
   - Initial state chỉ dùng cho lần đầu, những lần sau nó bị bỏ rơi.
+Video 6. Những điều cần biết về useEffect hooks
+1. Side effects là gì? Có bao nhiêu loại?
+  - Side effect là gì?
+    + Gọi API lấy dữ liệu.
+    + Tương tác với DOM
+    + Subcriptions.
+    + setTimeout, setInterval
+Theo tài liệu chính thức thì chia làm 2 loại side effects:
+  - Effects không cần clean up: gọi API, tương tác DOM.
+  - Effects cần clean up: subcriptions, setTimeout, setInterval.
+  Ref: https://reactjs.org/docs/hook-effect.html
+2. Giới thiệu hook useEffect().
+  - Là một hook cơ bản trong React hooks
+  - Sử dụng cho side effects.
+  - Mỗi hook gồm 2 phần: side effect và clean up (optional).
+  - Được thực thi sau mỗi lần render.
+  - Được thực thi ít nhất một lần sau lần render đầu tiên.
+  - Những lần render sau, chỉ được thực thi nếu có dependencies thay đổi.
+  - Effect cleanup sẽ được thực thi trước run effect lần tiếp theo hoặc unmount.
+Video 8. Gọi API với useEffect hooks
+Video 9. React Hooks - Pagination với useEffect hooks
+Video 10. useEffect search có debounce
+Video 11. useEffect cleanup với code đồng hồ
+--------------
+Video 12. Giới thiệu tổng quát custom hooks.
+1. Custom hooks là gì?
+  - Một hook do mình tự định nghĩa ra.
+  - Custom hook là một function hơi đặc biệt
+  - Có thể sử dụng các hooks khác như useState, useEffect,... hoặc một custom hook khác.
+  - Đặt tên custom hooks theo dạng: useClock(), useClickOutside(), useQuery(),...
+2. Khi nào dùng custom hooks?
+  - Tách riêng biệt phần logic ra khỏi phần UI để tái sử dụng.
+  - Chia sẻ logic giữa các component.
+  - Custom hooks là một function đặc biệt sử dụng được hooks khác.
+  - Custom hooks return data thay vì JSX như component.
+Video 13. Code custom hooks useClock()
+----------------
+Video 14. Code a custom hooks from scratch
+----------------
+Video 15. Giới thiệu Memoization và React.memo
+1. Memoization là gì?
+  - Kỹ thuật giúp mình tăng tốc độ xử lý máy tính lên bằng cách lưu trữ lại dữ liệu của những tính toán trước đó.
+  - Khi gặp lại bộ input đã từng làm thì không tính toán lại, mà trả về kết quả sẵn có. 
+2. Ví dụ.
+3. Giới thiệu HOC React.memo()
+  - React.memo() là một HOC, chứ ko phải hooks
+  - React.memo() tương tự như PureComponent
+  - PureComponent thì cho class component
+  - React.memo() dùng cho functional component
+  - Chỉ render lại component nếu props thay đổi
+  - Sử dụng shallow comparison.
+--------------
+Video 16. So sánh useCallback và useMemo
+1. useCallback() là gì?
+  - Là một react hooks giúp mình tạo ra một memoized callback và chỉ tạo ra callback mới khi dependencied thay đổi.
+    + Nhận vào 2 tham số: 1 là function, 2 là dependencies.
+    + Return memoized callback
+    + Chỉ tạo ra function mới khi dependencies thay đổi.
+    + Nếu dùng empty dependencies thì không bao giờ tạo ra function mới.
+2. useMemo() là gì?
+  - Là một react hooks giúp mình tạo ra một memoized value và chỉ tính toán ra value mới khi dependencies thay đổi.
+    + Nhận vào 2 tham số: 1 là function, 2 là dependencies.
+    + Return memoized value
+    + Chỉ tính toán value mới khi dependencies thay đổi.
+    + Nếu dùng empty dependencies thì không bao giờ tạo ra value mới.
+3. So sánh useCallback() vs useMemo()
+Giống nhau:
+  - Đều áp dụng kĩ thuật memoization.
+  - Đều nhận vào 2 tham số: function và dependencies.
+  - Đều là react hooks, dùng cho functional component.
+  - Dùng để hạn chế những lần re-render dư thừa (micro improvement).
+Khác nhau:
+useCallback() return memoized callback
+              code   useCallback((type) => {}, [])
+useMemo()     return memoized value
+              code   useMemo(() => [{}, {}, {}], [])
+4. Có nên sử dụng useCallback() và useMemo() hay không?
+  - Không nên dùng tất cả components.
+  - Nên dùng cho: đồ thị, biểu đồ, animations, những component nặng phần render.
+  - Chỉ là micro improvements.
